@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+
+    /* Custom Colors */
+    --primary-blue: #2563EB;
+    --primary-dark: #1E40AF;
+    --primary-light: #DBEAFE;
+    --success-green: #10B981;
+    --warning-orange: #F59E0B;
+    --error-red: #EF4444;
+    --info-purple: #8B5CF6;
+    --teal: #14B8A6;
+    
+    /* Gray Scale */
+    --gray-900: #111827;
+    --gray-700: #374151;
+    --gray-500: #6B7280;
+    --gray-300: #D1D5DB;
+    --gray-100: #F3F4F6;
+    --gray-50: #F9FAFB;
+    
+    /* Typography */
+    --text-display: 48px;
+    --text-h1: 36px;
+    --text-h2: 30px;
+    --text-h3: 24px;
+    --text-h4: 20px;
+    --text-body-large: 16px;
+    --text-body: 14px;
+    --text-small: 12px;
+    --text-tiny: 10px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+  h1 {
+    font-size: var(--text-h1);
+    font-weight: 700;
+    color: var(--gray-900);
+  }
+  h2 {
+    font-size: var(--text-h2);
+    font-weight: 600;
+    color: var(--gray-900);
+  }
+  h3 {
+    font-size: var(--text-h3);
+    font-weight: 600;
+    color: var(--gray-900);
+  }
+  h4 {
+    font-size: var(--text-h4);
+    font-weight: 600;
+    color: var(--gray-900);
+  }
+}
