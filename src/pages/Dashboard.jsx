@@ -1,4 +1,5 @@
 import { Card } from "../components/ui/card";
+import { useState } from "react";
 import {
   Users,
   Briefcase,
@@ -72,18 +73,172 @@ const studentsData = [
   { label: "1.0", value: 0 },
 ];
 
-const calendar = {
-  month: "FEBRUARY",
-  year: "2026",
-  days: [
-    [null, null, null, null, null, 1, 2],
-    [3, 4, 5, 6, 7, 8, 9],
-    [10, 11, 12, 13, 14, 15, 16],
-    [17, 18, 19, 20, 21, 22, 23],
-    [24, 25, 26, 27, 28, null, null],
-  ],
-  today: 23,
-};
+// Real Calendar Component
+function RealCalendar() {
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const monthNames = [
+    "JANUARY",
+    "FEBRUARY",
+    "MARCH",
+    "APRIL",
+    "MAY",
+    "JUNE",
+    "JULY",
+    "AUGUST",
+    "SEPTEMBER",
+    "OCTOBER",
+    "NOVEMBER",
+    "DECEMBER",
+  ];
+
+  const dayNames = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+
+  // Get current month/year
+  const month = currentDate.getMonth();
+  const year = currentDate.getFullYear();
+  const today = new Date();
+
+  // Get first day of month and number of days
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+  // Build calendar grid
+  const calendarDays = [];
+
+  // Previous month days
+  for (let i = firstDay - 1; i >= 0; i--) {
+    calendarDays.push({
+      day: daysInPrevMonth - i,
+      isCurrentMonth: false,
+      isToday: false,
+    });
+  }
+
+  // Current month days
+  for (let day = 1; day <= daysInMonth; day++) {
+    const isToday =
+      day === today.getDate() &&
+      month === today.getMonth() &&
+      year === today.getFullYear();
+
+    calendarDays.push({
+      day: day,
+      isCurrentMonth: true,
+      isToday: isToday,
+    });
+  }
+
+  // Next month days to fill grid
+  const remainingDays = 42 - calendarDays.length; // 6 rows * 7 days
+  for (let day = 1; day <= remainingDays; day++) {
+    calendarDays.push({
+      day: day,
+      isCurrentMonth: false,
+      isToday: false,
+    });
+  }
+
+  const goToPrevMonth = () => {
+    setCurrentDate(new Date(year, month - 1, 1));
+  };
+
+  const goToNextMonth = () => {
+    setCurrentDate(new Date(year, month + 1, 1));
+  };
+
+  const goToToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  // Format current date display
+  const currentDateDisplay = new Date(year, month, today.getDate());
+  const formattedDate = currentDateDisplay
+    .toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    })
+    .toUpperCase();
+
+  return (
+    <Card>
+      <div className="p-4">
+        {/* Calendar Header */}
+        <div className="flex items-center justify-between mb-4">
+          <button
+            onClick={goToPrevMonth}
+            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5 text-gray-600" />
+          </button>
+          <div className="text-center">
+            <h3 className="font-bold text-purple-500 text-lg">
+              {monthNames[month]}
+            </h3>
+            <p className="text-sm text-gray-500">{year}</p>
+            <p className="text-xs text-gray-400 mt-0.5">{formattedDate}</p>
+          </div>
+          <button
+            onClick={goToNextMonth}
+            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <ChevronRight className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
+
+        {/* Today Button */}
+        <button
+          onClick={goToToday}
+          className="w-full mb-3 px-3 py-1.5 text-xs font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors"
+        >
+          Go to Today
+        </button>
+
+        {/* Calendar Grid */}
+        <div className="grid grid-cols-7 gap-1">
+          {/* Day Names */}
+          {dayNames.map((day) => (
+            <div
+              key={day}
+              className="text-center text-xs font-semibold text-gray-500 py-2"
+            >
+              {day}
+            </div>
+          ))}
+
+          {/* Calendar Days */}
+          {calendarDays.map((dayInfo, index) => (
+            <div
+              key={index}
+              className={`
+                aspect-square flex items-center justify-center text-sm rounded-lg cursor-pointer transition-colors
+                ${!dayInfo.isCurrentMonth ? "text-gray-300" : "text-gray-700"}
+                ${
+                  dayInfo.isToday
+                    ? "bg-purple-500 text-white font-bold shadow-md"
+                    : dayInfo.isCurrentMonth
+                      ? "hover:bg-purple-50"
+                      : ""
+                }
+              `}
+            >
+              {dayInfo.day}
+            </div>
+          ))}
+        </div>
+
+        {/* Legend */}
+        <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-center gap-2 text-xs text-gray-500">
+          <div className="w-3 h-3 bg-purple-500 rounded"></div>
+          <span>Today</span>
+        </div>
+      </div>
+    </Card>
+  );
+}
 
 export default function Dashboard() {
   return (
@@ -422,56 +577,8 @@ export default function Dashboard() {
             </div>
           </Card>
 
-          {/* Calendar */}
-          <Card>
-            <div className="p-4">
-              <div className="flex items-center justify-between mb-4">
-                <button className="p-1 hover:bg-gray-100 rounded">
-                  <ChevronLeft className="w-5 h-5 text-gray-600" />
-                </button>
-                <div className="text-center">
-                  <h3 className="font-bold text-purple-500">
-                    {calendar.month}
-                  </h3>
-                  <p className="text-sm text-gray-500">{calendar.year}</p>
-                  <p className="text-xs text-gray-400">MON FEB 23 2026</p>
-                </div>
-                <button className="p-1 hover:bg-gray-100 rounded">
-                  <ChevronRight className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
-
-              {/* Calendar Grid */}
-              <div className="grid grid-cols-7 gap-1 text-center">
-                {/* Week Days */}
-                {["SU", "MO", "TU", "WE", "TH", "FR", "SA"].map((day) => (
-                  <div
-                    key={day}
-                    className="text-xs font-semibold text-gray-500 py-2"
-                  >
-                    {day}
-                  </div>
-                ))}
-                {/* Calendar Days */}
-                {calendar.days.flat().map((day, index) => (
-                  <div
-                    key={index}
-                    className={`
-                      py-2 text-sm
-                      ${!day ? "text-transparent" : ""}
-                      ${
-                        day === calendar.today
-                          ? "bg-purple-500 text-white rounded-lg font-semibold"
-                          : "text-gray-700 hover:bg-gray-100 rounded-lg"
-                      }
-                    `}
-                  >
-                    {day || "0"}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Card>
+          {/* REAL CALENDAR - WORKING! */}
+          <RealCalendar />
         </div>
       </div>
     </div>
