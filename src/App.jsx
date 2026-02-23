@@ -15,6 +15,9 @@ import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import AIAssistant from "./pages/AIAssistant";
 import NotFound from "./pages/NotFound";
+import SchoolSettings from './pages/settingPages/SchoolSettings'
+import AcademicYear from "./pages/settingPages/AcademicYear";
+
 
 function App() {
   return (
@@ -35,6 +38,8 @@ function App() {
           <Route path="reports" element={<Reports />} />
           <Route path="settings" element={<Settings />} />
           <Route path="ai-assistant" element={<AIAssistant />} />
+          <Route path="/settings/school" element={<SchoolSettings />} />
+          <Route path="/settings/academic-year" element={<AcademicYear />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
