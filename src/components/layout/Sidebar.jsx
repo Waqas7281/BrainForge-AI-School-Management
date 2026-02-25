@@ -809,7 +809,7 @@ export function Sidebar({ isOpen, setIsOpen }) {
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              eSkooly
+              BrainForge
             </span>
           </div>
           <button
