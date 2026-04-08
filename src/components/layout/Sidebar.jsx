@@ -93,11 +93,12 @@ const navItems = [
       { path: "/settings/timezone", label: "Timezone", icon: Clock },
       { path: "/settings/email", label: "Email Settings", icon: Mail },
       { path: "/settings/backup", label: "Backup & Restore", icon: Database },
-      { path: "/settings/system", label: "System Settings", icon: Settings },
+      { path: "/settings/system", label: "System Settings", icon: Settings }, // ← YEH ADD KARO
     ],
   },
 
   // ==================== CLASSES ====================
+
   {
     label: "Classes",
     icon: BookOpen,
@@ -144,6 +145,7 @@ const navItems = [
     submenu: [
       { path: "/students", label: "All Students", icon: GraduationCap },
       { path: "/students/add", label: "Add New Student", icon: UserPlus },
+      { path: "/students/:id", label: "Student Details", icon: Eye },
       { path: "/students/admission", label: "Student Admission", icon: Plus },
       {
         path: "/students/promote",
@@ -226,22 +228,22 @@ const navItems = [
   },
 
   // ==================== HUMAN RESOURCE ====================
-  {
-    label: "Human Resource",
-    icon: Users,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/hr/leave-types", label: "Leave Types", icon: Calendar },
-      { path: "/hr/leave-requests", label: "Leave Requests", icon: Clock },
-      { path: "/hr/approve-leave", label: "Approve Leave", icon: UserCheck },
-      {
-        path: "/hr/leave-allocations",
-        label: "Leave Allocations",
-        icon: Package,
-      },
-      { path: "/hr/payroll", label: "Payroll", icon: Wallet },
-    ],
-  },
+  // {
+  //   label: "Human Resource",
+  //   icon: Users,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/hr/leave-types", label: "Leave Types", icon: Calendar },
+  //     { path: "/hr/leave-requests", label: "Leave Requests", icon: Clock },
+  //     { path: "/hr/approve-leave", label: "Approve Leave", icon: UserCheck },
+  //     {
+  //       path: "/hr/leave-allocations",
+  //       label: "Leave Allocations",
+  //       icon: Package,
+  //     },
+  //     { path: "/hr/payroll", label: "Payroll", icon: Wallet },
+  //   ],
+  // },
 
   // ==================== ACCOUNTS ====================
   {
@@ -249,27 +251,27 @@ const navItems = [
     icon: Wallet,
     hasSubmenu: true,
     submenu: [
-      { path: "/accounts/chart", label: "Chart of Accounts", icon: BarChart3 },
+      // { path: "/accounts/chart", label: "Chart of Accounts", icon: BarChart3 },
       { path: "/accounts/income", label: "Income", icon: TrendingUp },
       { path: "/accounts/income-head", label: "Income Head", icon: FileText },
       { path: "/accounts/expense", label: "Expense", icon: CreditCard },
       { path: "/accounts/expense-head", label: "Expense Head", icon: FileText },
       { path: "/accounts/ledger", label: "Ledger", icon: BookOpen },
-      {
-        path: "/accounts/balance-sheet",
-        label: "Balance Sheet",
-        icon: PieChart,
-      },
-      {
-        path: "/accounts/trial-balance",
-        label: "Trial Balance",
-        icon: BarChart3,
-      },
-      {
-        path: "/accounts/profit-loss",
-        label: "Profit & Loss",
-        icon: TrendingUp,
-      },
+      // {
+      //   path: "/accounts/balance-sheet",
+      //   label: "Balance Sheet",
+      //   icon: PieChart,
+      // },
+      // {
+      //   path: "/accounts/trial-balance",
+      //   label: "Trial Balance",
+      //   icon: BarChart3,
+      // },
+      // {
+      //   path: "/accounts/profit-loss",
+      //   label: "Profit & Loss",
+      //   icon: TrendingUp,
+      // },
     ],
   },
 
@@ -282,9 +284,9 @@ const navItems = [
       { path: "/fees/master", label: "Fees Master", icon: Database },
       { path: "/fees/group", label: "Fees Group", icon: Package },
       { path: "/fees/type", label: "Fees Type", icon: Tag },
-      { path: "/fees/discount", label: "Fees Discount", icon: Percent },
-      { path: "/fees/carry-forward", label: "Fees Carry Forward", icon: Send },
-      { path: "/fees/reminder", label: "Fees Reminder", icon: Bell },
+      // { path: "/fees/discount", label: "Fees Discount", icon: Percent },
+      // { path: "/fees/carry-forward", label: "Fees Carry Forward", icon: Send },
+      // { path: "/fees/reminder", label: "Fees Reminder", icon: Bell },
       { path: "/fees/collect", label: "Collect Fees", icon: DollarSign },
       {
         path: "/fees/search-payment",
@@ -293,7 +295,7 @@ const navItems = [
       },
       { path: "/fees/search-due", label: "Search Due Fees", icon: Clock },
       { path: "/fees/statement", label: "Fees Statement", icon: Receipt },
-      { path: "/fees/balance", label: "Balance Fees Report", icon: Wallet },
+      // { path: "/fees/balance", label: "Balance Fees Report", icon: Wallet },
     ],
   },
 
@@ -304,7 +306,7 @@ const navItems = [
     hasSubmenu: true,
     submenu: [
       { path: "/salary/grade", label: "Salary Grade", icon: Award },
-      { path: "/salary/template", label: "Salary Template", icon: FileText },
+      // { path: "/salary/template", label: "Salary Template", icon: FileText },
       { path: "/salary/assign", label: "Assign Salary", icon: Users },
       { path: "/salary/payment", label: "Make Payment", icon: DollarSign },
       { path: "/salary/payslip", label: "Generate Payslip", icon: Receipt },
@@ -323,32 +325,28 @@ const navItems = [
         label: "Student Attendance",
         icon: GraduationCap,
       },
-      {
-        path: "/attendance/student-approve",
-        label: "Approve Leave (Student)",
-        icon: UserCheck,
-      },
+      // {
+      //   path: "/attendance/student-approve",
+      //   label: "Approve Leave (Student)",
+      //   icon: UserCheck,
+      // },
       {
         path: "/attendance/teacher",
         label: "Teacher Attendance",
         icon: UserCheck,
       },
       { path: "/attendance/staff", label: "Staff Attendance", icon: Briefcase },
-      {
-        path: "/attendance/biometric",
-        label: "Biometric Attendance",
-        icon: Eye,
-      },
+    
       {
         path: "/attendance/report",
         label: "Attendance Report",
         icon: BarChart3,
       },
-      {
-        path: "/attendance/summary",
-        label: "Attendance Summary",
-        icon: PieChart,
-      },
+      // {
+      //   path: "/attendance/summary",
+      //   label: "Attendance Summary",
+      //   icon: PieChart,
+      // },
     ],
   },
 
@@ -369,37 +367,37 @@ const navItems = [
   },
 
   // ==================== HOMEWORK ====================
-  {
-    label: "Homework",
-    icon: BookMarked,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/homework/add", label: "Add Homework", icon: Plus },
-      { path: "/homework/list", label: "Homework List", icon: BookMarked },
-      {
-        path: "/homework/evaluate",
-        label: "Evaluate Homework",
-        icon: UserCheck,
-      },
-    ],
-  },
+  // {
+  //   label: "Homework",
+  //   icon: BookMarked,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/homework/add", label: "Add Homework", icon: Plus },
+  //     { path: "/homework/list", label: "Homework List", icon: BookMarked },
+  //     {
+  //       path: "/homework/evaluate",
+  //       label: "Evaluate Homework",
+  //       icon: UserCheck,
+  //     },
+  //   ],
+  // },
 
   // ==================== ASSIGNMENTS ====================
-  {
-    label: "Assignments",
-    icon: FileText,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/assignments/add", label: "Add Assignment", icon: Plus },
-      { path: "/assignments/list", label: "Assignment List", icon: FileText },
-      {
-        path: "/assignments/submissions",
-        label: "View Submissions",
-        icon: Inbox,
-      },
-      { path: "/assignments/grade", label: "Grade Assignments", icon: Award },
-    ],
-  },
+  // {
+  //   label: "Assignments",
+  //   icon: FileText,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/assignments/add", label: "Add Assignment", icon: Plus },
+  //     { path: "/assignments/list", label: "Assignment List", icon: FileText },
+  //     {
+  //       path: "/assignments/submissions",
+  //       label: "View Submissions",
+  //       icon: Inbox,
+  //     },
+  //     { path: "/assignments/grade", label: "Grade Assignments", icon: Award },
+  //   ],
+  // },
 
   // ==================== EXAMINATIONS ====================
   {
@@ -407,185 +405,185 @@ const navItems = [
     icon: ClipboardList,
     hasSubmenu: true,
     submenu: [
-      { path: "/exams/exam-group", label: "Exam Group", icon: Package },
+      // { path: "/exams/exam-group", label: "Exam Group", icon: Package },
       { path: "/exams/exam-schedule", label: "Exam Schedule", icon: Calendar },
-      { path: "/exams/exam-hall", label: "Exam Hall", icon: Building2 },
+      // { path: "/exams/exam-hall", label: "Exam Hall", icon: Building2 },
       { path: "/exams/marks-grade", label: "Marks Grade", icon: Award },
       { path: "/exams/marks-entry", label: "Marks Entry", icon: FileText },
-      {
-        path: "/exams/marks-register",
-        label: "Marks Register",
-        icon: BookOpen,
-      },
+      // {
+      //   path: "/exams/marks-register",
+      //   label: "Marks Register",
+      //   icon: BookOpen,
+      // },
       { path: "/exams/result-card", label: "Result Card", icon: Trophy },
       { path: "/exams/result-publish", label: "Publish Result", icon: Send },
-      { path: "/exams/admit-card", label: "Admit Card", icon: CreditCard },
-      { path: "/exams/seat-plan", label: "Seat Plan", icon: MapPin },
+      // { path: "/exams/admit-card", label: "Admit Card", icon: CreditCard },
+      // { path: "/exams/seat-plan", label: "Seat Plan", icon: MapPin },
     ],
   },
 
   // ==================== ONLINE EXAM ====================
-  {
-    label: "Online Exam",
-    icon: FileQuestion,
-    hasSubmenu: true,
-    submenu: [
-      {
-        path: "/online-exam/question-bank",
-        label: "Question Bank",
-        icon: Database,
-      },
-      {
-        path: "/online-exam/question-group",
-        label: "Question Group",
-        icon: Package,
-      },
-      { path: "/online-exam/create", label: "Create Online Exam", icon: Plus },
-      {
-        path: "/online-exam/list",
-        label: "Online Exam List",
-        icon: FileQuestion,
-      },
-      { path: "/online-exam/marks", label: "Online Exam Marks", icon: Award },
-    ],
-  },
+  // {
+  //   label: "Online Exam",
+  //   icon: FileQuestion,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     {
+  //       path: "/online-exam/question-bank",
+  //       label: "Question Bank",
+  //       icon: Database,
+  //     },
+  //     {
+  //       path: "/online-exam/question-group",
+  //       label: "Question Group",
+  //       icon: Package,
+  //     },
+  //     { path: "/online-exam/create", label: "Create Online Exam", icon: Plus },
+  //     {
+  //       path: "/online-exam/list",
+  //       label: "Online Exam List",
+  //       icon: FileQuestion,
+  //     },
+  //     { path: "/online-exam/marks", label: "Online Exam Marks", icon: Award },
+  //   ],
+  // },
 
   // ==================== BEHAVIOUR & SKILLS ====================
-  {
-    label: "Behaviour & Skills",
-    icon: Eye,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/behaviour/assign", label: "Assign Incident", icon: Plus },
-      { path: "/behaviour/incident-list", label: "Incident List", icon: Flag },
-      { path: "/behaviour/report", label: "Incident Report", icon: BarChart3 },
-      { path: "/behaviour/skills", label: "Skills", icon: Star },
-      {
-        path: "/behaviour/assign-skills",
-        label: "Assign Skills",
-        icon: UserCheck,
-      },
-    ],
-  },
+  // {
+  //   label: "Behaviour & Skills",
+  //   icon: Eye,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/behaviour/assign", label: "Assign Incident", icon: Plus },
+  //     { path: "/behaviour/incident-list", label: "Incident List", icon: Flag },
+  //     { path: "/behaviour/report", label: "Incident Report", icon: BarChart3 },
+  //     { path: "/behaviour/skills", label: "Skills", icon: Star },
+  //     {
+  //       path: "/behaviour/assign-skills",
+  //       label: "Assign Skills",
+  //       icon: UserCheck,
+  //     },
+  //   ],
+  // },
 
   // ==================== LIBRARY ====================
-  {
-    label: "Library",
-    icon: BookOpen,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/library/books", label: "Book List", icon: BookOpen },
-      { path: "/library/add-book", label: "Add New Book", icon: Plus },
-      { path: "/library/categories", label: "Book Categories", icon: Package },
-      { path: "/library/issue", label: "Issue Book", icon: Send },
-      { path: "/library/return", label: "Return Book", icon: Download },
-      { path: "/library/member", label: "Library Members", icon: Users },
-      { path: "/library/card", label: "Library Card", icon: CreditCard },
-    ],
-  },
+  // {
+  //   label: "Library",
+  //   icon: BookOpen,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/library/books", label: "Book List", icon: BookOpen },
+  //     { path: "/library/add-book", label: "Add New Book", icon: Plus },
+  //     { path: "/library/categories", label: "Book Categories", icon: Package },
+  //     { path: "/library/issue", label: "Issue Book", icon: Send },
+  //     { path: "/library/return", label: "Return Book", icon: Download },
+  //     { path: "/library/member", label: "Library Members", icon: Users },
+  //     { path: "/library/card", label: "Library Card", icon: CreditCard },
+  //   ],
+  // },
 
   // ==================== TRANSPORT ====================
-  {
-    label: "Transport",
-    icon: Car,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/transport/routes", label: "Routes", icon: MapPin },
-      { path: "/transport/vehicles", label: "Vehicles", icon: Car },
-      { path: "/transport/assign", label: "Assign Vehicle", icon: UserCheck },
-      { path: "/transport/driver", label: "Drivers", icon: Users },
-    ],
-  },
+  // {
+  //   label: "Transport",
+  //   icon: Car,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/transport/routes", label: "Routes", icon: MapPin },
+  //     { path: "/transport/vehicles", label: "Vehicles", icon: Car },
+  //     { path: "/transport/assign", label: "Assign Vehicle", icon: UserCheck },
+  //     { path: "/transport/driver", label: "Drivers", icon: Users },
+  //   ],
+  // },
 
   // ==================== HOSTEL ====================
-  {
-    label: "Hostel",
-    icon: Home,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/hostel/list", label: "Hostel List", icon: Home },
-      { path: "/hostel/room-type", label: "Room Type", icon: Package },
-      { path: "/hostel/rooms", label: "Hostel Rooms", icon: Building2 },
-      { path: "/hostel/allocation", label: "Room Allocation", icon: UserCheck },
-      { path: "/hostel/member", label: "Hostel Members", icon: Users },
-    ],
-  },
+  // {
+  //   label: "Hostel",
+  //   icon: Home,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/hostel/list", label: "Hostel List", icon: Home },
+  //     { path: "/hostel/room-type", label: "Room Type", icon: Package },
+  //     { path: "/hostel/rooms", label: "Hostel Rooms", icon: Building2 },
+  //     { path: "/hostel/allocation", label: "Room Allocation", icon: UserCheck },
+  //     { path: "/hostel/member", label: "Hostel Members", icon: Users },
+  //   ],
+  // },
 
   // ==================== INVENTORY ====================
-  {
-    label: "Inventory",
-    icon: Package,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/inventory/category", label: "Item Category", icon: Tag },
-      { path: "/inventory/items", label: "Item List", icon: Package },
-      { path: "/inventory/store", label: "Item Store", icon: Building2 },
-      { path: "/inventory/supplier", label: "Item Supplier", icon: Users },
-      {
-        path: "/inventory/purchase",
-        label: "Item Purchase",
-        icon: ShoppingCart,
-      },
-      { path: "/inventory/issue", label: "Item Issue", icon: Send },
-      { path: "/inventory/stock", label: "Item Stock", icon: Database },
-    ],
-  },
+  // {
+  //   label: "Inventory",
+  //   icon: Package,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/inventory/category", label: "Item Category", icon: Tag },
+  //     { path: "/inventory/items", label: "Item List", icon: Package },
+  //     { path: "/inventory/store", label: "Item Store", icon: Building2 },
+  //     { path: "/inventory/supplier", label: "Item Supplier", icon: Users },
+  //     {
+  //       path: "/inventory/purchase",
+  //       label: "Item Purchase",
+  //       icon: ShoppingCart,
+  //     },
+  //     { path: "/inventory/issue", label: "Item Issue", icon: Send },
+  //     { path: "/inventory/stock", label: "Item Stock", icon: Database },
+  //   ],
+  // },
 
   // ==================== CANTEEN ====================
-  {
-    label: "Canteen",
-    icon: Utensils,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/canteen/menu", label: "Canteen Menu", icon: FileText },
-      { path: "/canteen/orders", label: "Orders", icon: ShoppingCart },
-      { path: "/canteen/items", label: "Menu Items", icon: Package },
-    ],
-  },
+  // {
+  //   label: "Canteen",
+  //   icon: Utensils,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/canteen/menu", label: "Canteen Menu", icon: FileText },
+  //     { path: "/canteen/orders", label: "Orders", icon: ShoppingCart },
+  //     { path: "/canteen/items", label: "Menu Items", icon: Package },
+  //   ],
+  // },
 
   // ==================== FRONT OFFICE ====================
-  {
-    label: "Front Office",
-    icon: Building2,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/front-office/visitor", label: "Visitor Book", icon: Users },
-      {
-        path: "/front-office/call-log",
-        label: "Phone Call Log",
-        icon: MessageSquare,
-      },
-      {
-        path: "/front-office/postal-dispatch",
-        label: "Postal Dispatch",
-        icon: Send,
-      },
-      {
-        path: "/front-office/postal-receive",
-        label: "Postal Receive",
-        icon: Inbox,
-      },
-      { path: "/front-office/complain", label: "Complain", icon: Flag },
-      {
-        path: "/front-office/admission-enquiry",
-        label: "Admission Enquiry",
-        icon: HelpCircle,
-      },
-    ],
-  },
+  // {
+  //   label: "Front Office",
+  //   icon: Building2,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/front-office/visitor", label: "Visitor Book", icon: Users },
+  //     {
+  //       path: "/front-office/call-log",
+  //       label: "Phone Call Log",
+  //       icon: MessageSquare,
+  //     },
+  //     {
+  //       path: "/front-office/postal-dispatch",
+  //       label: "Postal Dispatch",
+  //       icon: Send,
+  //     },
+  //     {
+  //       path: "/front-office/postal-receive",
+  //       label: "Postal Receive",
+  //       icon: Inbox,
+  //     },
+  //     { path: "/front-office/complain", label: "Complain", icon: Flag },
+  //     {
+  //       path: "/front-office/admission-enquiry",
+  //       label: "Admission Enquiry",
+  //       icon: HelpCircle,
+  //     },
+  //   ],
+  // },
 
   // ==================== ONLINE STORE & POS ====================
-  {
-    label: "Online Store & POS",
-    icon: ShoppingBag,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/store/categories", label: "Categories", icon: Package },
-      { path: "/store/products", label: "Products", icon: ShoppingBag },
-      { path: "/store/orders", label: "Orders", icon: ShoppingCart },
-      { path: "/store/pos", label: "POS", icon: CreditCard },
-    ],
-  },
+  // {
+  //   label: "Online Store & POS",
+  //   icon: ShoppingBag,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/store/categories", label: "Categories", icon: Package },
+  //     { path: "/store/products", label: "Products", icon: ShoppingBag },
+  //     { path: "/store/orders", label: "Orders", icon: ShoppingCart },
+  //     { path: "/store/pos", label: "POS", icon: CreditCard },
+  //   ],
+  // },
 
   // ==================== WHATSAPP ====================
   {
@@ -608,51 +606,51 @@ const navItems = [
         label: "Send SMS",
         icon: MessageSquare,
       },
-      { path: "/communication/email-log", label: "Email Log", icon: History },
-      { path: "/communication/sms-log", label: "SMS Log", icon: History },
+      // { path: "/communication/email-log", label: "Email Log", icon: History },
+      // { path: "/communication/sms-log", label: "SMS Log", icon: History },
     ],
   },
 
   // ==================== LIVE CLASS ====================
-  {
-    label: "Live Classes",
-    icon: Video,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/live-class/zoom", label: "Zoom Live Class", icon: Video },
-      { path: "/live-class/settings", label: "Settings", icon: Settings },
-      { path: "/live-class/reports", label: "Class Reports", icon: BarChart3 },
-    ],
-  },
+  // {
+  //   label: "Live Classes",
+  //   icon: Video,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/live-class/zoom", label: "Zoom Live Class", icon: Video },
+  //     { path: "/live-class/settings", label: "Settings", icon: Settings },
+  //     { path: "/live-class/reports", label: "Class Reports", icon: BarChart3 },
+  //   ],
+  // },
 
   // ==================== CONTENT ====================
-  {
-    label: "Download Center",
-    icon: Download,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/download/content", label: "Upload Content", icon: Upload },
-      { path: "/download/assignment", label: "Assignments", icon: FileText },
-      {
-        path: "/download/study-material",
-        label: "Study Material",
-        icon: BookOpen,
-      },
-      { path: "/download/syllabus", label: "Syllabus", icon: FileText },
-      { path: "/download/other", label: "Other Downloads", icon: Download },
-    ],
-  },
+  // {
+  //   label: "Download Center",
+  //   icon: Download,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/download/content", label: "Upload Content", icon: Upload },
+  //     { path: "/download/assignment", label: "Assignments", icon: FileText },
+  //     {
+  //       path: "/download/study-material",
+  //       label: "Study Material",
+  //       icon: BookOpen,
+  //     },
+  //     { path: "/download/syllabus", label: "Syllabus", icon: FileText },
+  //     { path: "/download/other", label: "Other Downloads", icon: Download },
+  //   ],
+  // },
 
   // ==================== GALLERY ====================
-  {
-    label: "Gallery",
-    icon: Image,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/gallery/photo", label: "Photo Gallery", icon: Image },
-      { path: "/gallery/video", label: "Video Gallery", icon: Film },
-    ],
-  },
+  // {
+  //   label: "Gallery",
+  //   icon: Image,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/gallery/photo", label: "Photo Gallery", icon: Image },
+  //     { path: "/gallery/video", label: "Video Gallery", icon: Film },
+  //   ],
+  // },
 
   // ==================== EVENTS ====================
   {
@@ -679,16 +677,16 @@ const navItems = [
   },
 
   // ==================== NEWS ====================
-  {
-    label: "News",
-    icon: Newspaper,
-    hasSubmenu: true,
-    submenu: [
-      { path: "/news/list", label: "News List", icon: Newspaper },
-      { path: "/news/add", label: "Add News", icon: Plus },
-      { path: "/news/categories", label: "News Categories", icon: Package },
-    ],
-  },
+  // {
+  //   label: "News",
+  //   icon: Newspaper,
+  //   hasSubmenu: true,
+  //   submenu: [
+  //     { path: "/news/list", label: "News List", icon: Newspaper },
+  //     { path: "/news/add", label: "Add News", icon: Plus },
+  //     { path: "/news/categories", label: "News Categories", icon: Package },
+  //   ],
+  // },
 
   // ==================== REPORTS ====================
   {
@@ -713,11 +711,11 @@ const navItems = [
       },
       { path: "/reports/exam", label: "Exam Report", icon: ClipboardList },
       { path: "/reports/fees", label: "Fees Report", icon: Receipt },
-      { path: "/reports/salary", label: "Salary Report", icon: Wallet },
-      { path: "/reports/library", label: "Library Report", icon: BookOpen },
-      { path: "/reports/inventory", label: "Inventory Report", icon: Package },
-      { path: "/reports/transport", label: "Transport Report", icon: Car },
-      { path: "/reports/custom", label: "Custom Report", icon: FileText },
+      // { path: "/reports/salary", label: "Salary Report", icon: Wallet },
+      // { path: "/reports/library", label: "Library Report", icon: BookOpen },
+      // { path: "/reports/inventory", label: "Inventory Report", icon: Package },
+      // { path: "/reports/transport", label: "Transport Report", icon: Car },
+      // { path: "/reports/custom", label: "Custom Report", icon: FileText },
     ],
   },
 
@@ -751,12 +749,12 @@ const navItems = [
     icon: Settings,
     hasSubmenu: true,
     submenu: [
-      { path: "/system/general", label: "General", icon: Settings },
+      // { path: "/system/general", label: "General", icon: Settings },
       { path: "/system/roles", label: "Roles & Permissions", icon: Shield },
       { path: "/system/backup", label: "Backup", icon: Database },
       { path: "/system/modules", label: "Module Manager", icon: Package },
-      { path: "/system/custom-fields", label: "Custom Fields", icon: FileText },
-      { path: "/system/currency", label: "Currency", icon: DollarSign },
+      // { path: "/system/custom-fields", label: "Custom Fields", icon: FileText },
+      // { path: "/system/currency", label: "Currency", icon: DollarSign },
     ],
   },
 ];
@@ -939,7 +937,7 @@ export function Sidebar({ isOpen, setIsOpen }) {
         {/* Bottom Section */}
         <div className="border-t border-gray-200 p-4 bg-gradient-to-b from-white to-gray-50">
           {/* Promo Box */}
-          <div className="bg-gradient-to-br from-purple-500 via-purple-600 to-indigo-600 rounded-xl p-4 text-white text-center shadow-lg">
+          {/* <div className="bg-gradient-to-br from-purple-500 via-purple-600 to-indigo-600 rounded-xl p-4 text-white text-center shadow-lg">
             <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
               <Zap className="w-6 h-6 text-white" />
             </div>
@@ -950,7 +948,7 @@ export function Sidebar({ isOpen, setIsOpen }) {
             <button className="w-full bg-white text-purple-600 text-xs font-bold py-2.5 px-4 rounded-lg hover:bg-gray-50 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
               Try Demo →
             </button>
-          </div>
+          </div> */}
         </div>
       </aside>
     </>
