@@ -1,4 +1,5 @@
 // src/store/slices/authSlice.js
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -7,7 +8,7 @@ const initialState = {
   role: localStorage.getItem("role") || null,
   schoolId: localStorage.getItem("schoolId") || null,
   isAuthenticated: !!localStorage.getItem("token"),
-  permissions: [],
+  permissions: JSON.parse(localStorage.getItem("permissions") || "[]"),
 };
 
 const authSlice = createSlice({
@@ -20,12 +21,13 @@ const authSlice = createSlice({
       state.token = token;
       state.role = role;
       state.schoolId = schoolId;
-      state.permissions = permissions;
+      state.permissions = permissions || [];
       state.isAuthenticated = true;
 
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
       localStorage.setItem("schoolId", schoolId);
+      localStorage.setItem("permissions", JSON.stringify(permissions || []));
     },
     logout: (state) => {
       state.user = null;
@@ -38,12 +40,18 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("role");
       localStorage.removeItem("schoolId");
+      localStorage.removeItem("permissions");
     },
     updateUser: (state, action) => {
       state.user = { ...state.user, ...action.payload };
     },
+    setPermissions: (state, action) => {
+      state.permissions = action.payload;
+      localStorage.setItem("permissions", JSON.stringify(action.payload));
+    },
   },
 });
 
-export const { setCredentials, logout, updateUser } = authSlice.actions;
+export const { setCredentials, logout, updateUser, setPermissions } =
+  authSlice.actions;
 export default authSlice.reducer;

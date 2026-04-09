@@ -1,4 +1,4 @@
-// src/pages/auth/Login.jsx - MOCK VERSION (No backend needed)
+// src/pages/auth/Login.jsx - MOCK VERSION (No Backend Needed)
 
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -9,6 +9,46 @@ import { GraduationCap, Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
+
+// Mock Users Data
+const mockUsers = {
+  "admin@school.edu": {
+    password: "admin123",
+    role: "school_admin",
+    name: "Admin User",
+    schoolId: "school_001",
+  },
+  "teacher@school.edu": {
+    password: "teacher123",
+    role: "teacher",
+    name: "Teacher User",
+    schoolId: "school_001",
+  },
+  "parent@school.edu": {
+    password: "parent123",
+    role: "parent",
+    name: "Parent User",
+    schoolId: "school_001",
+  },
+  "accountant@school.edu": {
+    password: "accountant123",
+    role: "accountant",
+    name: "Accountant User",
+    schoolId: "school_001",
+  },
+  "staff@school.edu": {
+    password: "staff123",
+    role: "staff",
+    name: "Staff User",
+    schoolId: "school_001",
+  },
+  "superadmin@school.edu": {
+    password: "super123",
+    role: "super_admin",
+    name: "Super Admin",
+    schoolId: null,
+  },
+};
 
 export default function Login() {
   const navigate = useNavigate();
@@ -21,40 +61,6 @@ export default function Login() {
     rememberMe: false,
   });
 
-  // Mock credentials
-  const mockUsers = {
-    "admin@school.edu": {
-      password: "admin123",
-      role: "school_admin",
-      name: "Admin User",
-      schoolId: "school_001",
-    },
-    "teacher@school.edu": {
-      password: "teacher123",
-      role: "teacher",
-      name: "Teacher User",
-      schoolId: "school_001",
-    },
-    "parent@school.edu": {
-      password: "parent123",
-      role: "parent",
-      name: "Parent User",
-      schoolId: "school_001",
-    },
-    "accountant@school.edu": {
-      password: "accountant123",
-      role: "accountant",
-      name: "Accountant User",
-      schoolId: "school_001",
-    },
-    "staff@school.edu": {
-      password: "staff123",
-      role: "staff",
-      name: "Staff User",
-      schoolId: "school_001",
-    },
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,9 +72,7 @@ export default function Login() {
     }
 
     setIsLoading(true);
-
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     const user = mockUsers[formData.email];
 
@@ -83,7 +87,6 @@ export default function Login() {
       return;
     }
 
-    // Store user data in Redux
     dispatch(
       setCredentials({
         user: {
@@ -108,19 +111,15 @@ export default function Login() {
     );
 
     // Redirect based on role
-    if (user.role === "super_admin") {
-      navigate("/super-admin/dashboard");
-    } else if (user.role === "school_admin") {
-      navigate("/dashboard");
-    } else if (user.role === "teacher") {
-      navigate("/teacher/dashboard");
-    } else if (user.role === "parent") {
-      navigate("/parent/dashboard");
-    } else if (user.role === "accountant") {
-      navigate("/accountant/dashboard");
-    } else {
-      navigate("/dashboard");
-    }
+    const redirectMap = {
+      super_admin: "/super-admin/dashboard",
+      school_admin: "/dashboard",
+      teacher: "/teacher/dashboard",
+      parent: "/parent/dashboard",
+      accountant: "/accountant/dashboard",
+      staff: "/staff/dashboard",
+    };
+    navigate(redirectMap[user.role] || "/dashboard");
 
     setIsLoading(false);
   };
@@ -128,7 +127,6 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
       <Card className="w-full max-w-md p-8 shadow-2xl border-0">
-        {/* Logo & Title */}
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <GraduationCap className="w-10 h-10 text-white" />
@@ -137,15 +135,7 @@ export default function Login() {
           <p className="text-gray-500 mt-1">School Management System</p>
         </div>
 
-        {/* Welcome Message */}
-        <div className="text-center mb-6">
-          <h2 className="text-xl font-semibold text-gray-700">Welcome Back!</h2>
-          <p className="text-sm text-gray-400">Please login to your account</p>
-        </div>
-
-        {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Email Address
@@ -159,13 +149,12 @@ export default function Login() {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="pl-9 h-11 bg-gray-50 border-gray-200 focus:bg-white"
+                className="pl-9 h-11 bg-gray-50 focus:bg-white"
                 required
               />
             </div>
           </div>
 
-          {/* Password Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Password
@@ -179,24 +168,23 @@ export default function Login() {
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
-                className="pl-9 pr-10 h-11 bg-gray-50 border-gray-200 focus:bg-white"
+                className="pl-9 pr-10 h-11 bg-gray-50 focus:bg-white"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2"
               >
                 {showPassword ? (
-                  <EyeOff className="w-4 h-4" />
+                  <EyeOff className="w-4 h-4 text-gray-400" />
                 ) : (
-                  <Eye className="w-4 h-4" />
+                  <Eye className="w-4 h-4 text-gray-400" />
                 )}
               </button>
             </div>
           </div>
 
-          {/* Remember Me & Forgot Password */}
           <div className="flex items-center justify-between">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
@@ -205,41 +193,38 @@ export default function Login() {
                 onChange={(e) =>
                   setFormData({ ...formData, rememberMe: e.target.checked })
                 }
-                className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="w-4 h-4 rounded border-gray-300"
               />
               <span className="text-sm text-gray-600">Remember me</span>
             </label>
             <Link
               to="/forgot-password"
-              className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
+              className="text-sm text-blue-600 hover:underline"
             >
               Forgot Password?
             </Link>
           </div>
 
-          {/* Submit Button */}
           <Button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-2.5 text-base font-semibold"
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-2.5"
           >
             {isLoading ? (
               <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Logging in...
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Logging in...
               </>
             ) : (
               "Login"
             )}
           </Button>
 
-          {/* Register Link */}
           <div className="text-center pt-2">
             <p className="text-sm text-gray-500">
               Don't have an account?{" "}
               <Link
                 to="/register"
-                className="text-blue-600 hover:text-blue-700 font-semibold hover:underline"
+                className="text-blue-600 font-semibold hover:underline"
               >
                 Register here
               </Link>

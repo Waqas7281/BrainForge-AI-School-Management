@@ -24,7 +24,7 @@ export default function TeacherDashboard() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-800">Teacher Dashboard</h1>
-        <p className="text-gray-500">
+        <p className="text-gray-500 mt-1">
           Welcome back! Here's your teaching summary
         </p>
       </div>
@@ -79,7 +79,9 @@ export default function TeacherDashboard() {
       </div>
 
       <Card className="p-6">
-        <h2 className="text-lg font-semibold mb-4">Today's Schedule</h2>
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">
+          Today's Schedule
+        </h2>
         <div className="space-y-3">
           {[
             {
@@ -119,7 +121,7 @@ export default function TeacherDashboard() {
 
       <div className="grid grid-cols-2 gap-4">
         <Card className="p-6">
-          <h2 className="font-semibold mb-3">Quick Actions</h2>
+          <h2 className="font-semibold text-gray-800 mb-3">Quick Actions</h2>
           <div className="grid grid-cols-2 gap-2">
             <button className="p-2 bg-blue-50 rounded text-blue-600 text-sm">
               Mark Attendance
@@ -127,10 +129,18 @@ export default function TeacherDashboard() {
             <button className="p-2 bg-green-50 rounded text-green-600 text-sm">
               Enter Marks
             </button>
+            <button className="p-2 bg-purple-50 rounded text-purple-600 text-sm">
+              Add Homework
+            </button>
+            <button className="p-2 bg-orange-50 rounded text-orange-600 text-sm">
+              Send Message
+            </button>
           </div>
         </Card>
         <Card className="p-6">
-          <h2 className="font-semibold mb-3">Recent Activities</h2>
+          <h2 className="font-semibold text-gray-800 mb-3">
+            Recent Activities
+          </h2>
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm">
               <CheckCircle className="w-3 h-3 text-green-500" /> Assignment
@@ -139,6 +149,10 @@ export default function TeacherDashboard() {
             <div className="flex items-center gap-2 text-sm">
               <TrendingUp className="w-3 h-3 text-blue-500" /> Class 1-A
               attendance: 95%
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Clock className="w-3 h-3 text-yellow-500" /> Homework pending for
+              3 students
             </div>
           </div>
         </Card>

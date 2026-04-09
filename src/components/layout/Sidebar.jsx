@@ -14,7 +14,6 @@ import {
   DollarSign,
   UserCheck,
   Calendar,
-  BookMarked,
   Eye,
   MessageSquare,
   Mail,
@@ -29,8 +28,6 @@ import {
   Globe,
   Bell,
   Database,
-  Upload,
-  Download,
   BarChart3,
   TrendingUp,
   CreditCard,
@@ -39,26 +36,10 @@ import {
   Briefcase,
   UserPlus,
   UserMinus,
-  History,
   Clock,
-  MapPin,
-  Car,
-  Home,
   Package,
-  ShoppingCart,
-  Tag,
-  Percent,
   Send,
-  Inbox,
-  Star,
-  Flag,
   Shield,
-  Key,
-  Zap,
-  Image,
-  Film,
-  Newspaper,
-  GitBranch,
 } from "lucide-react";
 
 // ==================== ROLE-BASED MENU ACCESS ====================
@@ -236,17 +217,26 @@ const teacherMenu = [
     icon: BookOpen,
     hasSubmenu: true,
     submenu: [
-      { path: "/my-classes", label: "Class List", icon: BookOpen },
-      { path: "/my-students", label: "My Students", icon: GraduationCap },
+      { path: "/teacher/my-classes", label: "Class List", icon: BookOpen },
+      {
+        path: "/teacher/my-students",
+        label: "My Students",
+        icon: GraduationCap,
+      },
     ],
   },
+
   {
     label: "Attendance",
     icon: UserCheck,
     hasSubmenu: true,
     submenu: [
-      { path: "/attendance/mark", label: "Mark Attendance", icon: UserCheck },
-      { path: "/attendance/view", label: "View Attendance", icon: Eye },
+      {
+        path: "/teacher/attendance/mark",
+        label: "Mark Attendance",
+        icon: UserCheck,
+      },
+      { path: "/teacher/attendance/view", label: "View Attendance", icon: Eye },
     ],
   },
   {
@@ -254,23 +244,29 @@ const teacherMenu = [
     icon: ClipboardList,
     hasSubmenu: true,
     submenu: [
-      { path: "/exams/marks-entry", label: "Enter Marks", icon: FileText },
-      { path: "/exams/results", label: "View Results", icon: Trophy },
+      {
+        path: "/teacher/exams/marks-entry",
+        label: "Enter Marks",
+        icon: FileText,
+      },
+      { path: "/teacher/exams/results", label: "View Results", icon: Trophy },
     ],
   },
   {
     label: "Timetable",
     icon: Calendar,
     hasSubmenu: true,
-    submenu: [{ path: "/timetable/my", label: "My Timetable", icon: Calendar }],
+    submenu: [
+      { path: "/teacher/timetable/my", label: "My Timetable", icon: Calendar },
+    ],
   },
   {
     label: "Communication",
     icon: Mail,
     hasSubmenu: true,
     submenu: [
-      { path: "/communication/notice", label: "Notices", icon: Bell },
-      { path: "/whatsapp", label: "WhatsApp", icon: MessageSquare },
+      { path: "/teacher/communication/notice", label: "Notices", icon: Bell },
+      { path: "/teacher/whatsapp", label: "WhatsApp", icon: MessageSquare },
     ],
   },
 ];
@@ -283,10 +279,14 @@ const parentMenu = [
     icon: GraduationCap,
     hasSubmenu: true,
     submenu: [
-      { path: "/child/profile", label: "Profile", icon: User },
-      { path: "/child/attendance", label: "Attendance", icon: UserCheck },
-      { path: "/child/results", label: "Results", icon: Trophy },
-      { path: "/child/fees", label: "Fees", icon: DollarSign },
+      { path: "/parent/child/profile", label: "Profile", icon: Users },
+      {
+        path: "/parent/child/attendance",
+        label: "Attendance",
+        icon: UserCheck,
+      },
+      { path: "/parent/child/results", label: "Results", icon: Trophy },
+      { path: "/parent/child/fees", label: "Fees", icon: DollarSign },
     ],
   },
   {
@@ -294,9 +294,9 @@ const parentMenu = [
     icon: Building2,
     hasSubmenu: true,
     submenu: [
-      { path: "/communication/notice", label: "Notices", icon: Bell },
-      { path: "/events", label: "Events", icon: Calendar },
-      { path: "/whatsapp", label: "WhatsApp", icon: MessageSquare },
+      { path: "/parent/communication/notice", label: "Notices", icon: Bell },
+      { path: "/parent/events", label: "Events", icon: Calendar },
+      { path: "/parent/whatsapp", label: "WhatsApp", icon: MessageSquare },
     ],
   },
 ];
@@ -394,7 +394,9 @@ const getMenuByRole = (role) => {
 };
 
 export function Sidebar({ isOpen, setIsOpen }) {
-  const { role } = useSelector((state) => state.auth);
+  // Safe way to get role - with fallback
+  const auth = useSelector((state) => state.auth);
+  const role = auth?.role || "school_admin"; // Default to school_admin if no role found
   const [expandedMenus, setExpandedMenus] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
 

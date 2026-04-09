@@ -1,5 +1,7 @@
-import { Card } from "../components/ui/card";
+// src/pages/Dashboard.jsx - Original Large Design
+
 import { useState } from "react";
+import { Card } from "../components/ui/card";
 import {
   Users,
   Briefcase,
@@ -94,17 +96,14 @@ function RealCalendar() {
 
   const dayNames = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
 
-  // Get current month/year
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
   const today = new Date();
 
-  // Get first day of month and number of days
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const daysInPrevMonth = new Date(year, month, 0).getDate();
 
-  // Build calendar grid
   const calendarDays = [];
 
   // Previous month days
@@ -130,8 +129,8 @@ function RealCalendar() {
     });
   }
 
-  // Next month days to fill grid
-  const remainingDays = 42 - calendarDays.length; // 6 rows * 7 days
+  // Next month days
+  const remainingDays = 42 - calendarDays.length;
   for (let day = 1; day <= remainingDays; day++) {
     calendarDays.push({
       day: day,
@@ -140,19 +139,10 @@ function RealCalendar() {
     });
   }
 
-  const goToPrevMonth = () => {
-    setCurrentDate(new Date(year, month - 1, 1));
-  };
+  const goToPrevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
+  const goToNextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
+  const goToToday = () => setCurrentDate(new Date());
 
-  const goToNextMonth = () => {
-    setCurrentDate(new Date(year, month + 1, 1));
-  };
-
-  const goToToday = () => {
-    setCurrentDate(new Date());
-  };
-
-  // Format current date display
   const currentDateDisplay = new Date(year, month, today.getDate());
   const formattedDate = currentDateDisplay
     .toLocaleDateString("en-US", {
@@ -166,11 +156,10 @@ function RealCalendar() {
   return (
     <Card>
       <div className="p-4">
-        {/* Calendar Header */}
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={goToPrevMonth}
-            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-1.5 hover:bg-gray-100 rounded-lg"
           >
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
@@ -183,23 +172,20 @@ function RealCalendar() {
           </div>
           <button
             onClick={goToNextMonth}
-            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-1.5 hover:bg-gray-100 rounded-lg"
           >
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
         </div>
 
-        {/* Today Button */}
         <button
           onClick={goToToday}
-          className="w-full mb-3 px-3 py-1.5 text-xs font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors"
+          className="w-full mb-3 px-3 py-1.5 text-xs font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 rounded-lg"
         >
           Go to Today
         </button>
 
-        {/* Calendar Grid */}
         <div className="grid grid-cols-7 gap-1">
-          {/* Day Names */}
           {dayNames.map((day) => (
             <div
               key={day}
@@ -208,21 +194,13 @@ function RealCalendar() {
               {day}
             </div>
           ))}
-
-          {/* Calendar Days */}
           {calendarDays.map((dayInfo, index) => (
             <div
               key={index}
               className={`
                 aspect-square flex items-center justify-center text-sm rounded-lg cursor-pointer transition-colors
                 ${!dayInfo.isCurrentMonth ? "text-gray-300" : "text-gray-700"}
-                ${
-                  dayInfo.isToday
-                    ? "bg-purple-500 text-white font-bold shadow-md"
-                    : dayInfo.isCurrentMonth
-                      ? "hover:bg-purple-50"
-                      : ""
-                }
+                ${dayInfo.isToday ? "bg-purple-500 text-white font-bold shadow-md" : dayInfo.isCurrentMonth ? "hover:bg-purple-50" : ""}
               `}
             >
               {dayInfo.day}
@@ -230,7 +208,6 @@ function RealCalendar() {
           ))}
         </div>
 
-        {/* Legend */}
         <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-center gap-2 text-xs text-gray-500">
           <div className="w-3 h-3 bg-purple-500 rounded"></div>
           <span>Today</span>
@@ -299,161 +276,151 @@ export default function Dashboard() {
           </div>
 
           {/* Statistics Chart */}
-          <Card>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Statistics
-                </h3>
-                <button className="p-1 hover:bg-gray-100 rounded">
-                  <ChevronLeft className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
-              <div className="mb-4 flex items-center gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-pink-400 rounded"></div>
-                  <span className="text-gray-600">Expenses</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-blue-400 rounded"></div>
-                  <span className="text-gray-600">Income</span>
-                </div>
-              </div>
-              <ResponsiveContainer width="100%" height={250}>
-                <LineChart data={statisticsData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                  <XAxis
-                    dataKey="month"
-                    stroke="#9CA3AF"
-                    style={{ fontSize: "12px" }}
-                  />
-                  <YAxis stroke="#9CA3AF" style={{ fontSize: "12px" }} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "white",
-                      border: "1px solid #E5E7EB",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="expenses"
-                    stroke="#F472B6"
-                    strokeWidth={2}
-                    dot={{ fill: "#F472B6", r: 4 }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="income"
-                    stroke="#60A5FA"
-                    strokeWidth={2}
-                    dot={{ fill: "#60A5FA", r: 4 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+          <Card className="p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold text-gray-900">
+                Statistics
+              </h3>
+              <button className="p-1 hover:bg-gray-100 rounded">
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
+              </button>
             </div>
+            <div className="mb-4 flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-pink-400 rounded"></div>
+                <span className="text-gray-600">Expenses</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-blue-400 rounded"></div>
+                <span className="text-gray-600">Income</span>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={statisticsData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                <XAxis
+                  dataKey="month"
+                  stroke="#9CA3AF"
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis stroke="#9CA3AF" style={{ fontSize: "12px" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "white",
+                    border: "1px solid #E5E7EB",
+                    borderRadius: "8px",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="expenses"
+                  stroke="#F472B6"
+                  strokeWidth={2}
+                  dot={{ fill: "#F472B6", r: 4 }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="income"
+                  stroke="#60A5FA"
+                  strokeWidth={2}
+                  dot={{ fill: "#60A5FA", r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </Card>
 
           {/* Students Statistics */}
-          <Card>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Statistics
-                </h3>
-                <button className="p-1 hover:bg-gray-100 rounded">
-                  <ChevronLeft className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
-              <div className="mb-4 flex items-center gap-2 text-sm">
-                <div className="w-3 h-3 bg-blue-500 rounded"></div>
-                <span className="text-gray-600">Students</span>
-              </div>
-              <ResponsiveContainer width="100%" height={200}>
-                <BarChart data={studentsData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                  <XAxis
-                    dataKey="label"
-                    stroke="#9CA3AF"
-                    style={{ fontSize: "12px" }}
-                  />
-                  <YAxis stroke="#9CA3AF" style={{ fontSize: "12px" }} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "white",
-                      border: "1px solid #E5E7EB",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  <Bar dataKey="value" fill="#3B82F6" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+          <Card className="p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold text-gray-900">
+                Statistics
+              </h3>
+              <button className="p-1 hover:bg-gray-100 rounded">
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
+              </button>
             </div>
+            <div className="mb-4 flex items-center gap-2 text-sm">
+              <div className="w-3 h-3 bg-blue-500 rounded"></div>
+              <span className="text-gray-600">Students</span>
+            </div>
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={studentsData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                <XAxis
+                  dataKey="label"
+                  stroke="#9CA3AF"
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis stroke="#9CA3AF" style={{ fontSize: "12px" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "white",
+                    border: "1px solid #E5E7EB",
+                    borderRadius: "8px",
+                  }}
+                />
+                <Bar dataKey="value" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
           </Card>
 
           {/* Today Absent Students */}
-          <Card>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-pink-400">
-                  Today Absent Students
-                </h3>
-                <button className="p-1 hover:bg-gray-100 rounded">
-                  <ChevronLeft className="w-5 h-5 text-gray-600" />
-                </button>
+          <Card className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-pink-400">
+                Today Absent Students
+              </h3>
+              <button className="p-1 hover:bg-gray-100 rounded">
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-3xl">😔</span>
               </div>
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-3xl">😔</span>
-                </div>
-                <p className="text-pink-400 text-sm">
-                  Attendance Not Marked Yet !
-                </p>
-              </div>
+              <p className="text-pink-400 text-sm">
+                Attendance Not Marked Yet !
+              </p>
             </div>
           </Card>
 
           {/* Today Present Employees */}
-          <Card>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-blue-500">
-                  Today Present Employees
-                </h3>
-                <button className="p-1 hover:bg-gray-100 rounded">
-                  <ChevronLeft className="w-5 h-5 text-gray-600" />
-                </button>
+          <Card className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-blue-500">
+                Today Present Employees
+              </h3>
+              <button className="p-1 hover:bg-gray-100 rounded">
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-3xl">😔</span>
               </div>
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-3xl">😔</span>
-                </div>
-                <p className="text-blue-500 text-sm">
-                  Attendance Not Marked Yet !
-                </p>
-              </div>
+              <p className="text-blue-500 text-sm">
+                Attendance Not Marked Yet !
+              </p>
             </div>
           </Card>
 
           {/* New Admissions */}
-          <Card>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-blue-500">
-                  New Admissions
-                </h3>
-                <button className="p-1 hover:bg-gray-100 rounded">
-                  <ChevronLeft className="w-5 h-5 text-gray-600" />
-                </button>
+          <Card className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-blue-500">
+                New Admissions
+              </h3>
+              <button className="p-1 hover:bg-gray-100 rounded">
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-3xl">📋</span>
               </div>
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-3xl">📋</span>
-                </div>
-                <p className="text-gray-500 text-sm">
-                  No New Admissions This Month
-                </p>
-              </div>
+              <p className="text-gray-500 text-sm">
+                No New Admissions This Month
+              </p>
             </div>
           </Card>
         </div>
@@ -461,44 +428,42 @@ export default function Dashboard() {
         {/* Right Sidebar - 1/3 width */}
         <div className="space-y-4 lg:space-y-6">
           {/* Estimated Fee */}
-          <Card>
-            <div className="p-6">
-              <div className="flex items-start gap-3 mb-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                    <span className="text-2xl">👩‍💼</span>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900 mb-1">
-                    Estimated Fee This Month
-                  </h3>
-                  <div className="flex items-center gap-1 text-pink-400 text-sm mb-2">
-                    <span>🎯</span>
-                    <span>Estimation</span>
-                  </div>
-                  <div className="text-3xl font-bold text-pink-400">$ 0</div>
+          <Card className="p-6">
+            <div className="flex items-start gap-3 mb-4">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">👩‍💼</span>
                 </div>
               </div>
-              <div className="space-y-3 pt-3 border-t border-gray-100">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-600 text-sm">$ 0</span>
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  Estimated Fee This Month
+                </h3>
+                <div className="flex items-center gap-1 text-pink-400 text-sm mb-2">
+                  <span>🎯</span>
+                  <span>Estimation</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-blue-500 text-sm flex items-center gap-1">
-                    <TrendingUp className="w-4 h-4" />
-                    Collections
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-900 font-semibold">$ 0</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-red-500 text-sm flex items-center gap-1">
-                    <span>⬇</span>
-                    Remainings
-                  </span>
-                </div>
+                <div className="text-3xl font-bold text-pink-400">$ 0</div>
+              </div>
+            </div>
+            <div className="space-y-3 pt-3 border-t border-gray-100">
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600 text-sm">$ 0</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-blue-500 text-sm flex items-center gap-1">
+                  <TrendingUp className="w-4 h-4" />
+                  Collections
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-900 font-semibold">$ 0</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-red-500 text-sm flex items-center gap-1">
+                  <span>⬇</span>
+                  Remainings
+                </span>
               </div>
             </div>
           </Card>
@@ -563,12 +528,10 @@ export default function Dashboard() {
               </p>
               <div className="flex gap-2">
                 <button className="bg-white/20 hover:bg-white/30 px-3 py-2 rounded text-xs flex items-center gap-2">
-                  <span>🪟</span>
-                  Download for Windows
+                  <span>🪟</span> Download for Windows
                 </button>
                 <button className="bg-white/20 hover:bg-white/30 px-3 py-2 rounded text-xs flex items-center gap-2">
-                  <span>🍎</span>
-                  Download for MacOS
+                  <span>🍎</span> Download for MacOS
                 </button>
               </div>
             </div>
@@ -577,7 +540,7 @@ export default function Dashboard() {
             </div>
           </Card>
 
-          {/* REAL CALENDAR - WORKING! */}
+          {/* REAL CALENDAR */}
           <RealCalendar />
         </div>
       </div>
