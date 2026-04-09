@@ -1,6 +1,7 @@
 // src/components/layout/TopNavbar.jsx
 
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Search,
   Bell,
@@ -19,7 +20,6 @@ import {
   Sun,
 } from "lucide-react";
 import { Input } from "../ui/input";
-import { useNavigate } from "react-router-dom";
 
 export function TopNavbar({ setIsOpen }) {
   const navigate = useNavigate();
@@ -67,7 +67,6 @@ export function TopNavbar({ setIsOpen }) {
   const [showMessages, setShowMessages] = useState(false);
   const [cartCount] = useState(2);
   const [messageCount] = useState(3);
-  const [notificationCount, setNotificationCount] = useState(2);
 
   const profileRef = useRef(null);
   const notificationRef = useRef(null);
@@ -122,13 +121,11 @@ export function TopNavbar({ setIsOpen }) {
     setNotifications(
       notifications.map((n) => (n.id === id ? { ...n, read: true } : n)),
     );
-    setNotificationCount(notifications.filter((n) => !n.read).length - 1);
   };
 
   // Mark all as read
   const markAllAsRead = () => {
     setNotifications(notifications.map((n) => ({ ...n, read: true })));
-    setNotificationCount(0);
   };
 
   // Handle search
